@@ -3,7 +3,7 @@ package secp256k1
 import (
 	"testing"
 
-	"github.com/MangoNet-Labs/mgo-go-sdk/account/signer/secp256k1"
+	"github.com/mangonet-labs/mgo-go-sdk/account/signer/secp256k1"
 )
 
 func TestSecp256k1(t *testing.T) {

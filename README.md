@@ -2,7 +2,7 @@
 
 ## Introduction
 
-`github.com/MangoNet-Labs/mgo-go-sdk` is the official Go SDK for Mango Blockchain, providing capabilities to interact with the Mango chain, including account management, transaction building, token operations, and more.
+`github.com/mangonet-labs/mgo-go-sdk` is the official Go SDK for Mango Blockchain, providing capabilities to interact with the Mango chain, including account management, transaction building, token operations, and more.
 
 ## Features
 
@@ -15,7 +15,7 @@
 
 ```sh
 # Install using go mod
-go get github.com/MangoNet-Labs/mgo-go-sdk
+go get github.com/mangonet-labs/mgo-go-sdk
 ```
 
 ## Directory Structure
@@ -45,8 +45,8 @@ package main
 
 import (
     "fmt"
-    "github.com/MangoNet-Labs/mgo-go-sdk/client"
-	"github.com/MangoNet-Labs/mgo-go-sdk/config"
+    "github.com/mangonet-labs/mgo-go-sdk/client"
+	"github.com/mangonet-labs/mgo-go-sdk/config"
 )
 
 func main() {
@@ -62,7 +62,7 @@ package main
 
 import (
     "fmt"
-    "github.com/MangoNet-Labs/mgo-go-sdk/account/keypair"
+    "github.com/mangonet-labs/mgo-go-sdk/account/keypair"
 )
 
 func main() {
@@ -82,8 +82,8 @@ package main
 
 import (
     "fmt"
-    "github.com/MangoNet-Labs/mgo-go-sdk/client"
-    "github.com/MangoNet-Labs/mgo-go-sdk/account/keypair"
+    "github.com/mangonet-labs/mgo-go-sdk/client"
+    "github.com/mangonet-labs/mgo-go-sdk/account/keypair"
 )
 
 func main() {

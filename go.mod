@@ -1,4 +1,4 @@
-module github.com/MangoNet-Labs/mgo-go-sdk
+module github.com/mangonet-labs/mgo-go-sdk
 
 go 1.22.1
 

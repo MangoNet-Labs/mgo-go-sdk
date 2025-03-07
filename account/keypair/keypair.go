@@ -5,13 +5,13 @@ import (
 	"encoding/hex"
 	"errors"
 
-	"github.com/MangoNet-Labs/mgo-go-sdk/account/signer"
-	"github.com/MangoNet-Labs/mgo-go-sdk/account/signer/ed25519"
-	"github.com/MangoNet-Labs/mgo-go-sdk/account/signer/secp256k1"
-	"github.com/MangoNet-Labs/mgo-go-sdk/bcs"
-	"github.com/MangoNet-Labs/mgo-go-sdk/config"
-	"github.com/MangoNet-Labs/mgo-go-sdk/model"
-	"github.com/MangoNet-Labs/mgo-go-sdk/utils"
+	"github.com/mangonet-labs/mgo-go-sdk/account/signer"
+	"github.com/mangonet-labs/mgo-go-sdk/account/signer/ed25519"
+	"github.com/mangonet-labs/mgo-go-sdk/account/signer/secp256k1"
+	"github.com/mangonet-labs/mgo-go-sdk/bcs"
+	"github.com/mangonet-labs/mgo-go-sdk/config"
+	"github.com/mangonet-labs/mgo-go-sdk/model"
+	"github.com/mangonet-labs/mgo-go-sdk/utils"
 
 	"github.com/tyler-smith/go-bip39"
 )

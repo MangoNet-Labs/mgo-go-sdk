@@ -7,7 +7,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/MangoNet-Labs/mgo-go-sdk/model/request"
+	"github.com/mangonet-labs/mgo-go-sdk/model/request"
 
 	"github.com/gorilla/websocket"
 	"github.com/tidwall/gjson"

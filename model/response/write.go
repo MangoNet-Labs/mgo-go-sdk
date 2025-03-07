@@ -1,6 +1,6 @@
 package response
 
-import "github.com/MangoNet-Labs/mgo-go-sdk/model"
+import "github.com/mangonet-labs/mgo-go-sdk/model"
 
 type MgoTransactionBlockResponse struct {
 	Digest                  string                 `json:"digest"                            yaml:"digest"`

@@ -3,7 +3,7 @@ package main
 import (
 	"testing"
 
-	"github.com/MangoNet-Labs/mgo-go-sdk/account/signer/ed25519"
+	"github.com/mangonet-labs/mgo-go-sdk/account/signer/ed25519"
 )
 
 func TestEd25519(t *testing.T) {

@@ -3,7 +3,7 @@ package client
 import (
 	"time"
 
-	"github.com/MangoNet-Labs/mgo-go-sdk/client/wsconn"
+	"github.com/mangonet-labs/mgo-go-sdk/client/wsconn"
 )
 
 // IMgoWebsocketAPI defines the subscription API related interface, and then implement it by the WebsocketClient.

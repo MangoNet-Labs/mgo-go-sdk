@@ -5,9 +5,9 @@ import (
 	"encoding/json"
 	"errors"
 
-	"github.com/MangoNet-Labs/mgo-go-sdk/client/httpconn"
-	"github.com/MangoNet-Labs/mgo-go-sdk/model/request"
-	"github.com/MangoNet-Labs/mgo-go-sdk/model/response"
+	"github.com/mangonet-labs/mgo-go-sdk/client/httpconn"
+	"github.com/mangonet-labs/mgo-go-sdk/model/request"
+	"github.com/mangonet-labs/mgo-go-sdk/model/response"
 
 	"github.com/tidwall/gjson"
 )

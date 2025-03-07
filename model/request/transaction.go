@@ -1,8 +1,8 @@
 package request
 
 import (
-	"github.com/MangoNet-Labs/mgo-go-sdk/account/keypair"
-	"github.com/MangoNet-Labs/mgo-go-sdk/model"
+	"github.com/mangonet-labs/mgo-go-sdk/account/keypair"
+	"github.com/mangonet-labs/mgo-go-sdk/model"
 )
 
 type TransferMgoRequest struct {

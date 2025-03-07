@@ -6,9 +6,9 @@ import (
 	"errors"
 	"strings"
 
-	"github.com/MangoNet-Labs/mgo-go-sdk/utils"
+	"github.com/mangonet-labs/mgo-go-sdk/utils"
 
-	"github.com/MangoNet-Labs/mgo-go-sdk/config"
+	"github.com/mangonet-labs/mgo-go-sdk/config"
 
 	"github.com/btcsuite/btcd/btcutil/bech32"
 )

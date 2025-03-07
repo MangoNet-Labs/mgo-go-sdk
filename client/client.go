@@ -1,7 +1,7 @@
 package client
 
 import (
-	"github.com/MangoNet-Labs/mgo-go-sdk/client/httpconn"
+	"github.com/mangonet-labs/mgo-go-sdk/client/httpconn"
 )
 
 type Client struct {

@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 
-	"github.com/MangoNet-Labs/mgo-go-sdk/client/httpconn"
+	"github.com/mangonet-labs/mgo-go-sdk/client/httpconn"
 
 	"github.com/tidwall/gjson"
 )

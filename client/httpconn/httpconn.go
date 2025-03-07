@@ -9,7 +9,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/MangoNet-Labs/mgo-go-sdk/model/request"
+	"github.com/mangonet-labs/mgo-go-sdk/model/request"
 
 	"golang.org/x/time/rate"
 )

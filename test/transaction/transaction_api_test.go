@@ -7,10 +7,10 @@ import (
 	"os"
 	"testing"
 
-	"github.com/MangoNet-Labs/mgo-go-sdk/account/keypair"
-	"github.com/MangoNet-Labs/mgo-go-sdk/client"
-	"github.com/MangoNet-Labs/mgo-go-sdk/config"
-	"github.com/MangoNet-Labs/mgo-go-sdk/model/request"
+	"github.com/mangonet-labs/mgo-go-sdk/account/keypair"
+	"github.com/mangonet-labs/mgo-go-sdk/client"
+	"github.com/mangonet-labs/mgo-go-sdk/config"
+	"github.com/mangonet-labs/mgo-go-sdk/model/request"
 )
 
 var ctx = context.Background()
