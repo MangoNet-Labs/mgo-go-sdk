@@ -6,3 +6,4 @@
 
 # Golang build
 *.exe
+.env

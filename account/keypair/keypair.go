@@ -1,6 +1,7 @@
 package keypair
 
 import (
+	"bytes"
 	"encoding/base64"
 	"encoding/hex"
 	"errors"
@@ -136,9 +137,21 @@ func (k *Keypair) MgoPrivateKey() string {
 	return mgoPrivateKey
 }
 
+type SignedMessageSerializedSig struct {
+	Message   string `json:"message"`
+	Signature string `json:"signature"`
+}
+
 type SignedTransactionSerializedSig struct {
 	TxBytes   string `json:"tx_bytes"`
 	Signature string `json:"signature"`
+}
+
+func (k *Keypair) SignMessage(message []byte, signtype config.Signtype) []byte {
+	data := dataWithIntent(message, signtype)
+	digest := digestData(data)
+	sigBytes := k.Sign(digest[:])
+	return sigBytes
 }
 
 // SignPersonalMessage signs a personal message using the Keypair's private key.
@@ -147,10 +160,12 @@ type SignedTransactionSerializedSig struct {
 // It returns the signature concatenated with the public key and a signature
 // scheme flag byte.
 func (k *Keypair) SignPersonalMessage(message []byte) []byte {
-	message = append(bcs.ULEBEncode(uint64(len(message))), message...)
-	data := dataWithIntent(message, config.PersonalMessage)
-	digest := digestData(data)
-	sigBytes := k.Sign(digest[:])
+
+	bcsEncodedMsg := bytes.Buffer{}
+	bcsEncoder := bcs.NewEncoder(&bcsEncodedMsg)
+	bcsEncoder.Encode(message)
+
+	sigBytes := k.SignMessage(bcsEncodedMsg.Bytes(), config.PersonalMessage)
 	publicKey := k.PublicKeyBytes()
 	signData := append(sigBytes, publicKey...)
 	signData = append([]byte{byte(config.Ed25519Flag)}, signData...)
@@ -161,17 +176,18 @@ func (k *Keypair) SignPersonalMessage(message []byte) []byte {
 // The method hashes the transaction block with a transaction intent, signs the digest,
 // and then returns the signature concatenated with the public key and a signature
 // scheme flag byte.
-func (k *Keypair) SignTransactionBlock(txn *model.TxnMetaData) *SignedTransactionSerializedSig {
-	txBytes, _ := base64.StdEncoding.DecodeString(txn.TxBytes)
-	data := dataWithIntent(txBytes, config.TransactionData)
-	digest := digestData(data)
+func (k *Keypair) SignTransactionBlock(txn *model.TxnMetaData) (*SignedTransactionSerializedSig, error) {
+	txBytes, err := base64.StdEncoding.DecodeString(txn.TxBytes)
+	if err != nil {
+		return nil, err
+	}
 
-	sigBytes := k.Sign(digest[:])
+	sigBytes := k.SignMessage(txBytes, config.TransactionData)
 
 	return &SignedTransactionSerializedSig{
 		TxBytes:   txn.TxBytes,
 		Signature: k.toSerializedSignature(sigBytes),
-	}
+	}, nil
 }
 
 // dataWithIntent adds a header to the given data that marks it with the given intent.
@@ -240,8 +256,12 @@ func VerifyPersonalMessage(msg []byte, sig []byte) bool {
 	}
 	signatureInfo := ParseSignatureInfo(sig, signatureScheme)
 	publickey := signatureInfo.PublicKey
-	msgReserialize := append(bcs.ULEBEncode(uint64(len(msg))), msg...)
-	intentMessage := dataWithIntent(msgReserialize, config.PersonalMessage)
+
+	bcsEncodedMsg := bytes.Buffer{}
+	bcsEncoder := bcs.NewEncoder(&bcsEncodedMsg)
+	bcsEncoder.Encode(msg)
+
+	intentMessage := dataWithIntent(bcsEncodedMsg.Bytes(), config.PersonalMessage)
 	digest := digestData(intentMessage)
 
 	switch config.SIGNATURE_SCHEME_TO_FLAG[signatureScheme] {

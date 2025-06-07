@@ -17,8 +17,10 @@ import (
 func (c *Client) SignAndExecuteTransactionBlock(ctx context.Context, req request.SignAndExecuteTransactionBlockRequest) (response.MgoTransactionBlockResponse, error) {
 	var rsp response.MgoTransactionBlockResponse
 
-	signedTxn := req.Keypair.SignTransactionBlock(&req.TxnMetaData)
-
+	signedTxn, err := req.Keypair.SignTransactionBlock(&req.TxnMetaData)
+	if err != nil {
+		return rsp, err
+	}
 	respBytes, err := c.conn.Request(ctx, httpconn.Operation{
 		Method: "mgo_executeTransactionBlock",
 		Params: []interface{}{

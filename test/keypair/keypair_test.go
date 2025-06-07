@@ -18,7 +18,6 @@ var devCli = client.NewMgoClient(config.RpcMgoTestnetEndpoint)
 func TestSignPersonalMessage(t *testing.T) {
 
 	sig, err := keypair.NewKeypair(config.Ed25519Flag)
-
 	if err != nil {
 		panic(err)
 	}
@@ -61,7 +60,10 @@ func TestSignTransactionBlock(t *testing.T) {
 	}
 
 	utils.JsonPrint(pay)
-	data := sig.SignTransactionBlock(&pay)
+	data, err := sig.SignTransactionBlock(&pay)
+	if err != nil {
+		t.Fatal(err)
+	}
 
 	t.Log(data.TxBytes)
 	t.Log(len(utils.DecodeBase64(data.Signature)))
