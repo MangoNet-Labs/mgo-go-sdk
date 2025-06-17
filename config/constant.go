@@ -63,10 +63,12 @@ const (
 )
 
 const (
+	RpcMgoMainnetEndpoint       = "https://mainnet.mangonet.io/"
 	RpcMgoTestnetEndpoint       = "https://fullnode.testnet2.mangonetwork.io/"
 	RpcMgoMirrorTestnetEndpoint = "https://fullnode.testnet.mangonetwork.io/"
 	RpcMgoDevnetEndpoint        = "https://fullnode.devnet.mangonetwork.io/"
 
+	WssMgoMainnetEndpoint       = "wss://mainnet.mangonet.io"
 	WssMgoTestnetEndpoint       = "wss://fullnode.testnet2.mangonetwork.io"
 	WssMgoMirrorTestnetEndpoint = "wss://fullnode.testnet.mangonetwork.io"
 	WssMgoDevnetEndpoint        = "wss://fullnode.devnet.mangonetwork.io"
