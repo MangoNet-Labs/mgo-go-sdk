@@ -1,0 +1,59 @@
+{
+  "data": {
+    "messageVersion": "v1",
+    "transaction": {
+      "kind": "ProgrammableTransaction",
+      "inputs": [
+        {
+          "type": "pure",
+          "value": "10000000000",
+          "valueType": "u64"
+        }
+      ],
+      "transactions": [
+        {
+          "SplitCoins": [
+            {
+              "Input": 0
+            },
+            {
+              "Input": 1
+            }
+          ]
+        },
+        {
+          "MoveCall": {
+            "package": "0x1be5069dd060e52ffa1147dd5af56a40b312a74a034edb78d5b13f4476e03331",
+            "module": "dw",
+            "function": "deposit",
+            "type_arguments": [
+              "0x161a456168fe96ea880bcdb7025116cc8c70b5d679a1c361238517312850e020::usdt::USDT"
+            ],
+            "arguments": [
+              {
+                "Result": 0
+              },
+              {
+                "Input": 2
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "sender": "0x22b6d3195090840253a65a41773832e1ad9eb5959938f38092d9187a083e6034",
+    "gasData": {
+      "payment": [
+        {
+          "objectId": "0x12b84bab3e8850f1ce0038750a77941ea90c643cbeba2dcc9e3f2c99debad986",
+          "version": 10197381,
+          "digest": "EE8sbJZ21Dqv1MgzDo197swKrQGkNzcfHADZFzYQffCj"
+        }
+      ],
+      "owner": "0x22b6d3195090840253a65a41773832e1ad9eb5959938f38092d9187a083e6034",
+      "price": "1000",
+      "budget": "3022656"
+    }
+  },
+  "txSignatures": []
+}
