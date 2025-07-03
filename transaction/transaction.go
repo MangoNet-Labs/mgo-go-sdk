@@ -24,6 +24,10 @@ type Transaction struct {
 	MgoClient       *client.Client
 }
 
+func (tx *Transaction) GetTransactionData() (*TransactionData, error) {
+	return &tx.Data, nil
+}
+
 func NewTransaction() *Transaction {
 	data := TransactionData{
 		V1: &TransactionDataV1{},
@@ -52,6 +56,12 @@ func (tx *Transaction) SetSponsoredSigner(signer *keypair.Keypair) *Transaction 
 
 func (tx *Transaction) SetMgoClient(client *client.Client) *Transaction {
 	tx.MgoClient = client
+
+	return tx
+}
+
+func (tx *Transaction) SetTransactionData(data *TransactionData) *Transaction {
+	tx.Data = *data
 
 	return tx
 }
@@ -272,7 +282,7 @@ func (tx *Transaction) Object(input any) Argument {
 		if v.Object.SharedObject != nil {
 
 			address := ConvertMgoAddressBytesToString(v.Object.SharedObject.ObjectId)
-			if index := tx.Data.V1.GetInputObjectIndex(address); index != nil {
+			if index := tx.Data.V1.GetInputObjectIndex(model.MgoAddress(address)); index != nil {
 				if v.Object.SharedObject.Mutable {
 					newExistObject := tx.Data.V1.Kind.ProgrammableTransaction.Inputs[*index]
 					if newExistObject.Object.SharedObject != nil {
@@ -362,7 +372,7 @@ func (tx *Transaction) ToMgoExecuteTransactionBlockRequest(
 		return nil, ErrSignerNotSet
 	}
 
-	b64TxBytes, err := tx.buildTransaction(ctx)
+	b64TxBytes, err := tx.BuildTransaction(ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -392,7 +402,7 @@ func (tx *Transaction) ToMgoExecuteTransactionBlockRequest(
 	}, nil
 }
 
-func (tx *Transaction) buildTransaction(ctx context.Context) (string, error) {
+func (tx *Transaction) BuildTransaction(ctx context.Context) (string, error) {
 	if tx.Signer == nil {
 		return "", ErrSignerNotSet
 	}
@@ -409,10 +419,10 @@ func (tx *Transaction) buildTransaction(ctx context.Context) (string, error) {
 	tx.SetGasBudgetIfNotSet(defaultGasBudget)
 	tx.SetSenderIfNotSet(model.MgoAddress(tx.Signer.MgoAddress()))
 
-	return tx.build(false)
+	return tx.Build(false)
 }
 
-func (tx *Transaction) build(onlyTransactionKind bool) (string, error) {
+func (tx *Transaction) Build(onlyTransactionKind bool) (string, error) {
 	if onlyTransactionKind {
 		bcsEncodedMsg, err := tx.Data.V1.Kind.Marshal()
 		if err != nil {

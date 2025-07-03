@@ -69,7 +69,7 @@ func TestExecuteTransactionBlock(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	signedTxn := ed25519Signer.SignTransactionBlock(&mergeCoins)
+	signedTxn, _ := ed25519Signer.SignTransactionBlock(&mergeCoins)
 	block, err := devCli.MgoExecuteTransactionBlock(ctx, request.MgoExecuteTransactionBlockRequest{
 		TxBytes:   mergeCoins.TxBytes,
 		Signature: []string{signedTxn.Signature},

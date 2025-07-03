@@ -1,0 +1,43 @@
+{
+  "transactionType": "MGO Transfer",
+  "sender": "0x2d6e8c6068158916fc130036314e54dac83e72912a3f83dd3be5526569490204",
+  "recipient": "0x0cafa361487490f306c0b4c3e4cf0dc6fd584c5259ab1d5457d80a9e2170e238",
+  "amount": "10000000",
+  "objectId": "Result[0]",
+  "gasData": {
+    "owner": "0x2d6e8c6068158916fc130036314e54dac83e72912a3f83dd3be5526569490204",
+    "budget": "50000000",
+    "price": "1000"
+  },
+  "commands": [
+    {
+      "type": "SplitCoins",
+      "description": "Split coins into smaller amounts",
+      "details": {
+        "amounts": [
+          "Input[0]: 10000000"
+        ]
+      }
+    },
+    {
+      "type": "TransferObjects",
+      "description": "Transfer objects to recipient",
+      "details": {
+        "objects": [],
+        "recipient": "0x0cafa361487490f306c0b4c3e4cf0dc6fd584c5259ab1d5457d80a9e2170e238"
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "type": "Pure",
+      "value": "10000000",
+      "description": "Pure input #0 (Amount)"
+    },
+    {
+      "type": "Pure",
+      "value": "0x0cafa361487490f306c0b4c3e4cf0dc6fd584c5259ab1d5457d80a9e2170e238",
+      "description": "Pure input #1 (Address)"
+    }
+  ]
+}

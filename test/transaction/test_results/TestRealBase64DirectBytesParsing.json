@@ -1,0 +1,75 @@
+{
+  "data": {
+    "messageVersion": "v1",
+    "transaction": {
+      "kind": "ProgrammableTransaction",
+      "inputs": [
+        {
+          "digest": "6MytWN8Tbayw5XVmtVnj3A8tQEHS9517LVjEvJVY7G5V",
+          "objectId": "0x88d0d176f92318af69948594736a09bc43ef4a101df6868f9c8fb421a8b0f0dc",
+          "objectType": "immOrOwnedObject",
+          "type": "object",
+          "version": "7774607"
+        },
+        {
+          "type": "pure",
+          "value": "10000000000",
+          "valueType": "u64"
+        },
+        {
+          "initialSharedVersion": "10197354",
+          "mutable": true,
+          "objectId": "0x538ddecc8d0842acf43b3fea41ed1f2dd64dbd9df19651e2fe3687e99ee3ce85",
+          "objectType": "sharedObject",
+          "type": "object"
+        }
+      ],
+      "transactions": [
+        {
+          "SplitCoins": [
+            {
+              "Input": 0
+            },
+            [
+              {
+                "Input": 1
+              }
+            ]
+          ]
+        },
+        {
+          "MoveCall": {
+            "package": "0x1be5069dd060e52ffa1147dd5af56a40b312a74a034edb78d5b13f4476e03331",
+            "module": "dw",
+            "function": "deposit",
+            "type_arguments": [
+              "0x161a456168fe96ea880bcdb7025116cc8c70b5d679a1c361238517312850e020::usdt::USDT"
+            ],
+            "arguments": [
+              {
+                "Input": 2
+              },
+              {
+                "Result": 0
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "sender": "0x22b6d3195090840253a65a41773832e1ad9eb5959938f38092d9187a083e6034",
+    "gasData": {
+      "payment": [
+        {
+          "objectId": "0x12b84bab3e8850f1ce0038750a77941ea90c643cbeba2dcc9e3f2c99debad986",
+          "version": 10197381,
+          "digest": "EE8sbJZ21Dqv1MgzDo197swKrQGkNzcfHADZFzYQffCj"
+        }
+      ],
+      "owner": "0x22b6d3195090840253a65a41773832e1ad9eb5959938f38092d9187a083e6034",
+      "price": "1000",
+      "budget": "3022656"
+    }
+  },
+  "txSignatures": []
+}
