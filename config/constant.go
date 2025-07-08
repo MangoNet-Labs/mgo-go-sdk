@@ -63,19 +63,16 @@ const (
 )
 
 const (
-	RpcMgoMainnetEndpoint       = "https://mainnet.mangonet.io/"
-	RpcMgoTestnetEndpoint       = "https://fullnode.testnet2.mangonetwork.io/"
-	RpcMgoMirrorTestnetEndpoint = "https://fullnode.testnet.mangonetwork.io/"
-	RpcMgoDevnetEndpoint        = "https://fullnode.devnet.mangonetwork.io/"
+	RpcMgoMainnetEndpoint = "https://mainnet.mangonet.io/"
+	RpcMgoTestnetEndpoint = "https://fullnode.testnet2.mangonetwork.io/"
+	RpcMgoDevnetEndpoint  = "https://fullnode.devnet.mangonetwork.io/"
 
-	WssMgoMainnetEndpoint       = "wss://mainnet.mangonet.io"
-	WssMgoTestnetEndpoint       = "wss://fullnode.testnet2.mangonetwork.io"
-	WssMgoMirrorTestnetEndpoint = "wss://fullnode.testnet.mangonetwork.io"
-	WssMgoDevnetEndpoint        = "wss://fullnode.devnet.mangonetwork.io"
+	WssMgoMainnetEndpoint = "wss://mainnet.mangonet.io"
+	WssMgoTestnetEndpoint = "wss://fullnode.testnet2.mangonetwork.io"
+	WssMgoDevnetEndpoint  = "wss://fullnode.devnet.mangonetwork.io"
 
-	FaucetTestnetEndpoint       = "https://faucet.testnet2.mangonetwork.io/gas"
-	FaucetMirrorTestnetEndpoint = "https://faucet.testnet.mangonetwork.io/gas"
-	FaucetDevnetEndpoint        = "https://faucet.devnet.mangonetwork.io/gas"
+	FaucetTestnetEndpoint = "https://faucet.testnet2.mangonetwork.io/gas"
+	FaucetDevnetEndpoint  = "https://faucet.devnet.mangonetwork.io/gas"
 )
 
 type IntentScope = uint8
