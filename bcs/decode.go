@@ -226,6 +226,12 @@ func (d *Decoder) decodeEnum(v reflect.Value) (int, error) {
 		return n, err
 	}
 
+	// Check if enumId is within bounds
+	numFields := v.NumField()
+	if enumId >= numFields {
+		return n, fmt.Errorf("enum variant %d out of range for struct with %d fields", enumId, numFields)
+	}
+
 	field := v.Field(enumId)
 
 	k, err := d.decode(field)
@@ -242,6 +248,11 @@ func (d *Decoder) decodeByteSlice(v reflect.Value) (int, error) {
 
 	if size == 0 {
 		return n, nil
+	}
+
+	// Add safety check for unreasonable sizes
+	if size > 100*1024*1024 { // 100MB limit
+		return n, fmt.Errorf("byte slice size too large: %d bytes", size)
 	}
 
 	tmp := make([]byte, size)
@@ -322,6 +333,11 @@ func (d *Decoder) decodeSlice(v reflect.Value) (int, error) {
 	size, n, err := ULEB128Decode[int](d.reader)
 	if err != nil {
 		return n, err
+	}
+
+	// Add safety check for unreasonable sizes
+	if size > 1000000 { // 1M elements limit
+		return n, fmt.Errorf("slice size too large: %d elements", size)
 	}
 
 	elementType := v.Type().Elem()

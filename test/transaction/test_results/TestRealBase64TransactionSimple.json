@@ -1,0 +1,51 @@
+{
+  "transactionType": "Coin Split",
+  "sender": "0x22b6d3195090840253a65a41773832e1ad9eb5959938f38092d9187a083e6034",
+  "amount": "10000000000",
+  "gasData": {
+    "owner": "0x22b6d3195090840253a65a41773832e1ad9eb5959938f38092d9187a083e6034",
+    "budget": "3022656",
+    "price": "1000",
+    "payment": "0x12b84bab3e8850f1ce0038750a77941ea90c643cbeba2dcc9e3f2c99debad986"
+  },
+  "commands": [
+    {
+      "type": "SplitCoins",
+      "description": "Split coins into smaller amounts",
+      "details": {
+        "amounts": [
+          "Input[1]: 10000000000"
+        ]
+      }
+    },
+    {
+      "type": "MoveCall",
+      "description": "Call 0x1be5069dd060e52ffa1147dd5af56a40b312a74a034edb78d5b13f4476e03331::dw::deposit",
+      "details": {
+        "function": "deposit",
+        "module": "dw",
+        "package": "0x1be5069dd060e52ffa1147dd5af56a40b312a74a034edb78d5b13f4476e03331",
+        "typeArguments": [
+          "0x161a456168fe96ea880bcdb7025116cc8c70b5d679a1c361238517312850e020::usdt::USDT"
+        ]
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "type": "Object",
+      "value": "0x88d0d176f92318af69948594736a09bc43ef4a101df6868f9c8fb421a8b0f0dc",
+      "description": "Object input #0 (Owned/Immutable)"
+    },
+    {
+      "type": "Pure",
+      "value": "10000000000",
+      "description": "Pure input #1 (Amount)"
+    },
+    {
+      "type": "Object",
+      "value": "0x538ddecc8d0842acf43b3fea41ed1f2dd64dbd9df19651e2fe3687e99ee3ce85",
+      "description": "Object input #2 (Shared)"
+    }
+  ]
+}

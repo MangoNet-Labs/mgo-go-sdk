@@ -24,8 +24,8 @@ func ConvertMgoAddressStringToBytes(address model.MgoAddress) (*model.MgoAddress
 	return (*model.MgoAddressBytes)(&fixedBytes), nil
 }
 
-func ConvertMgoAddressBytesToString(addr model.MgoAddressBytes) model.MgoAddress {
-	return model.MgoAddress("0x" + hex.EncodeToString(addr[:]))
+func ConvertMgoAddressBytesToString(addr model.MgoAddressBytes) string {
+	return "0x" + hex.EncodeToString(addr[:])
 }
 
 func ConvertObjectDigestStringToBytes(digest model.ObjectDigest) (*model.ObjectDigestBytes, error) {
@@ -42,4 +42,17 @@ func ConvertObjectDigestStringToBytes(digest model.ObjectDigest) (*model.ObjectD
 
 func ConvertObjectDigestBytesToString(digest model.ObjectDigestBytes) model.ObjectDigest {
 	return model.ObjectDigest(base58.Encode(digest))
+}
+
+// ConvertBytesToMgoAddressBytes converts a byte slice to MgoAddressBytes
+// The input must be exactly 32 bytes long
+func ConvertBytesToMgoAddressBytes(bytes []byte) (*model.MgoAddressBytes, error) {
+	if len(bytes) != 32 {
+		return nil, ErrInvalidMgoAddress
+	}
+
+	var fixedBytes [32]byte
+	copy(fixedBytes[:], bytes)
+
+	return (*model.MgoAddressBytes)(&fixedBytes), nil
 }

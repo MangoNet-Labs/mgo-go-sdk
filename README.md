@@ -23,12 +23,12 @@ go get github.com/mangonet-labs/mgo-go-sdk
 ```
 ├─ account          # Account management
 │  ├─ keypair       # Key pair management
-│  └─ signer        # Signer 
+│  └─ signer        # Signer
 ├─ bcs              # Serialization and deserialization
 ├─ client           # Core client functionalities
 │  ├─ httpconn      # HTTP connection management
 │  ├─ wsconn        # WebSocket connection management
-├─ config           # Configuration 
+├─ config           # Configuration
 ├─ model            # Data models
 │  ├─ request       # Request data structures
 │  └─ response      # Response data structures
@@ -123,6 +123,76 @@ func main() {
 	log.Println("Digest", executeRes.Digest)
 }
 ```
+
+## Multi-Transaction Blocks
+
+The MGO Go SDK supports **Programmable Transaction Blocks (PTBs)**, allowing you to execute multiple transactions atomically within a single transaction block:
+
+```go
+// Create a transaction with multiple operations
+tx := transaction.NewTransaction()
+tx.SetMgoClient(cli).SetSigner(key).SetSender(sender).SetGasPrice(1000).SetGasBudget(50000000)
+
+// Operation 1: Split coins
+splitResult := tx.SplitCoins(tx.Gas(), []transaction.Argument{
+    tx.Pure(uint64(1000000000 * 0.01)), // 0.01 MGO
+})
+
+// Operation 2: Transfer split coins
+tx.TransferObjects([]transaction.Argument{splitResult}, tx.Pure(recipient))
+
+// Execute all operations atomically
+resp, err := tx.Execute(ctx, options, "WaitForLocalExecution")
+```
+
+### Benefits of Multi-Transaction Blocks:
+
+- **Atomicity**: All operations succeed or fail together
+- **Gas Efficiency**: Lower gas costs compared to separate transactions
+- **Chaining**: Use outputs from one operation as inputs to another
+- **Consistency**: Ensure state consistency across multiple operations
+
+### Multiple Move Calls in One Transaction
+
+You can also make multiple Move calls within a single transaction:
+
+```go
+// Multiple Move calls in one transaction
+tx := transaction.NewTransaction()
+tx.SetMgoClient(cli).SetSigner(key).SetSender(sender).SetGasPrice(1000).SetGasBudget(100000000)
+
+// Move Call 1: Split coins
+splitResult := tx.MoveCall(
+    "0x0000000000000000000000000000000000000000000000000000000000000002",
+    "pay", "split", typeArgs,
+    []transaction.Argument{tx.Gas(), tx.Pure(uint64(1000000000 * 0.05))},
+)
+
+// Move Call 2: Use result from first call
+tx.MoveCall(
+    "0x0000000000000000000000000000000000000000000000000000000000000002",
+    "pay", "join", typeArgs,
+    []transaction.Argument{tx.Gas(), splitResult}, // Chain the calls
+)
+
+// Move Call 3: Custom contract interaction
+tx.MoveCall(
+    "0xpackage_id", "module_name", "function_name", typeArgs,
+    []transaction.Argument{splitResult, tx.Pure(params)},
+)
+
+// Execute all Move calls atomically
+resp, err := tx.Execute(ctx, options, "WaitForLocalExecution")
+```
+
+For detailed examples and patterns, see:
+
+- `docs/MULTI_TRANSACTION_GUIDE.md` - Comprehensive guide
+- `docs/MULTI_MOVE_CALL_GUIDE.md` - Multi Move call patterns
+- `examples/multi_transaction_example.go` - Working examples
+- `examples/demo_multi_move_call.go` - Move call demonstrations
+- `test/multi_transaction/` - Test cases and validation
+- `test/multi_move_call/` - Move call test cases
 
 ## Usage Examples
 
